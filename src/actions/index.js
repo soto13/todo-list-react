@@ -1,6 +1,8 @@
 import HomeModule from '../modules/home/home.module';
 import UserModule from '../modules/user/user.module';
 
+let nextTodoId = 0
+
 export const redirectHome = () => {
   return {
     type: 'REDIRECT_HOME',
@@ -19,3 +21,24 @@ export const redirectUser = () => {
   }
 }
 
+export const addTodo = (text) => {
+  return {
+    type: 'ADD_TODO',
+    id: nextTodoId++,
+    text
+  }
+}
+
+export const setVisibilityFilter = (filter) => {
+  return {
+    type: 'SET_VISIBILITY_FILTER',
+    filter
+  }
+}
+
+export const toggleTodo = (id) => {
+  return {
+    type: 'TOGGLE_TODO',
+    id
+  }
+}

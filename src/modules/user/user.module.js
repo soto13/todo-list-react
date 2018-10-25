@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { pathReducer } from '../../reducers';
 
 class UserModule extends Component {
   render() {
@@ -9,5 +10,11 @@ class UserModule extends Component {
     )
   }
 }
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    todos: pathReducer(state.path, ownProps.filter)
+  };
+};
 
 export default UserModule;
