@@ -2,6 +2,7 @@ import HomeModule from '../modules/home/home.module';
 import UserModule from '../modules/user/user.module';
 
 let nextTodoId = 0
+let nextUserId = 0
 
 export const redirectHome = () => {
   return {
@@ -40,5 +41,24 @@ export const toggleTodo = (id) => {
   return {
     type: 'TOGGLE_TODO',
     id
+  }
+}
+
+export const setUserDaata = function(user) {
+  return {
+    type: 'ADD_USER',
+    user: {
+      id: nextUserId++,
+      firstname: user.firstname,
+      lastname: user.lastname,
+      phone: user.phone,
+    }
+  }
+}
+
+export const getUserDaata = function(userSelected) {
+  return {
+    type: 'GET_USER',
+    userSelected
   }
 }
