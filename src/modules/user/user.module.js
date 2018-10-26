@@ -34,7 +34,7 @@ class UserModule extends Component {
     const { firstname, lastname, phone } = this.state;
 
     if (firstname && lastname && phone) {
-      const stateProps = mapStateToProps({ firstname,  lastname,  phone });
+      const stateProps = mapStateToProps({ firstname,  lastname,  phone, isVisible: false });
       mapDispatchToProps(store.dispatch(stateProps));
       return;
     }

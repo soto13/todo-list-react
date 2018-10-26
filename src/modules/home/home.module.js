@@ -1,28 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ShowUserComponent } from '../../components/show-user/show-user.component';
-import store from '../../store';
 
 export class HomeModule extends Component {
-  users = [];
-
-  getUsers() {
-    return this.users = store.getState().user;
-  }
 
   render() {
-    this.getUsers();
+    const { user } = this.props;
+
     return (
       <div>
         <h1>Hello from home</h1>
-        <ShowUserComponent users={ this.users } />
+        <ShowUserComponent users={ user } />
       </div>
     )
   }
 }
 
 const mapStateToProps = (state) => {
-  console.log(state)
   return state;
 }
 
