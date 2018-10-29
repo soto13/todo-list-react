@@ -6,13 +6,21 @@ import { updateUserVisible } from '../../actions';
 export class ShowUserComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = { usersDivs: (<div></div>), dataUser: (<div></div>), showData: false, divKey: '' }
+    this.state = { showData: false, divKey: '', user: {} }
   }
 
   componentDidMount() {
     this.unsubscribe = this.context.store.subscribe(() => {
+      const { divKey, user } = this.state;
       this.forceUpdate();
-      console.log('hola', this.context.store.getState().user[0].isVisible)
+      this.test = (
+        <div key={ divKey } >
+          <p>Apellido: { user.lastname }</p>
+          <p>Teléfono: { user.phone }</p>
+          <p>Es visible: { (user.isVisible) ? 'si' : 'no' }</p>
+          <button onClick={ this.changeVisible.bind(this, user.id) } >cambiar</button>
+        </div>
+      )
     });
   }
 
@@ -27,7 +35,7 @@ export class ShowUserComponent extends Component {
       if (user.id !== null) return (
         <div key={ user.id } >
           <p>{ user.firstname }</p>
-          { (this.state.showData) && (this.state.divKey === user.id)  && (this.state.dataUser) }
+          { (this.state.showData) && (this.state.divKey === user.id)  && (this.test) }
           <button onClick={ this.showUser.bind(this, user, user.id) } >mostrar</button>
         </div>
       );
@@ -35,18 +43,19 @@ export class ShowUserComponent extends Component {
     })
   }
 
-  showUser(user, key, show = false) {
+  showUser(user, key) {
+    this.test = (
+      <div key={ key } >
+        <p>Apellido: { user.lastname }</p>
+        <p>Teléfono: { user.phone }</p>
+        <p>Es visible: { (user.isVisible) ? 'si' : 'no' }</p>
+        <button onClick={ this.changeVisible.bind(this, user.id) } >cambiar</button>
+      </div>
+    )
     this.setState({
-      dataUser: (
-        <div key={ key } >
-          <p>Apellido: { user.lastname }</p>
-          <p>Teléfono: { user.phone }</p>
-          <p>Es visible: { (user.isVisible) ? 'si' : 'no' }</p>
-          <button onClick={ this.changeVisible.bind(this, user.id) } >cambiar</button>
-        </div>
-      ),
       showData: !this.state.showData,
-      divKey: key
+      divKey: key,
+      user
     })
     return 
   }
@@ -54,7 +63,7 @@ export class ShowUserComponent extends Component {
   changeVisible(id) {
     try {
       this.props.updateUserVisible(id);
-      return null;
+      return;
     } catch (e) {
       return console.log(e, 'error');
     }
