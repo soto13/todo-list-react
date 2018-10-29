@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 // import { Route } from 'react-router';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { TopNavComponent } from '../components';
-import HomeModule from '../modules/home/home.module';
-import UserModule from '../modules/user/user.module';
+import { HomeModule, UserModule } from '../modules';
 
 const AppRouter = () => (
   <BrowserRouter>

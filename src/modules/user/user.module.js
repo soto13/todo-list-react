@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setUserDaata } from '../../actions';
-import store from '../../store';
 
 class UserModule extends Component {
   constructor(props) {
     super(props);
-    this.state = { firstname: '', lastname: '', phone: '' };
+    this.state = { firstname: '', lastname: '', phone: '',  inputfirstname: '', inputlastname: '', inputphone: '' };
   }
 
   lenghtToGetText(text) {
@@ -16,27 +15,31 @@ class UserModule extends Component {
 
   setFirstName(event) {
     const firstname = event.target.value;
-    return (this.lenghtToGetText(firstname)) ? this.setState({ firstname }) : null;
+    return (this.lenghtToGetText(firstname)) ? this.setState({ firstname, inputfirstname: event.target }) : null;
   }
 
   setLastName(event) {
     const lastname = event.target.value;
-    return (this.lenghtToGetText(lastname)) ? this.setState({ lastname }) : null;
+    return (this.lenghtToGetText(lastname)) ? this.setState({ lastname, inputlastname: event.target }) : null;
 
   }
 
   setPhone(event) {
     const phone = event.target.value;
-    return (this.lenghtToGetText(phone)) ? this.setState({ phone }) : null;
+    return (this.lenghtToGetText(phone)) ? this.setState({ phone, inputphone: event.target }) : null;
   }
 
   addUser() {
-    const { firstname, lastname, phone } = this.state;
+    const { firstname, lastname, phone, inputfirstname, inputlastname, inputphone } = this.state;
 
     if (firstname && lastname && phone) {
-      const stateProps = mapStateToProps({ firstname,  lastname,  phone, isVisible: false });
-      mapDispatchToProps(store.dispatch(stateProps));
-      return;
+      try {
+        this.props.setUserDaata({ firstname,  lastname,  phone, isVisible: false });
+        inputfirstname.value = inputlastname.value = inputphone.value = '';
+        return this.setState({ firstname: '',  lastname: '',  phone: '', isVisible: false, inputfirstname: '' });
+      } catch (e) {
+        return console.log('error', e);
+      }
     }
     return console.log('Debes llenar los datos');
   }
@@ -54,17 +57,12 @@ class UserModule extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  if (state.firstname) {
-    return setUserDaata(state);
-  }
-  return state;
-}
+const mapStateToProps = (state) => setUserDaata(state);
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onTodoClick: (id) => {
-      dispatch(id)
+    setUserDaata: (user) => {
+      dispatch(setUserDaata(user))
     }
   }
 }

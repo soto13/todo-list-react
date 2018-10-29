@@ -26,7 +26,7 @@ const userReducer = function(state = initialState, action) {
       return state;
 
     case UPDATE_USER_VISIBLE:
-      state.filter(user => { if (user.id === action.id) { Object.assign({}, user, user.isVisible = !user.isVisible); return user; } })
+      state.filter(user => { if (user.id === action.id) { Object.assign({}, user, user.isVisible = !user.isVisible); return user; } return user })
       return state;
     
     default:

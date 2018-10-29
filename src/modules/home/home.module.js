@@ -1,29 +1,28 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { updateUserVisible } from '../../actions';
 import { ShowUserComponent } from '../../components/show-user/show-user.component';
 
 export class HomeModule extends Component {
 
   render() {
-    const { user } = this.props;
+    console.log(this.props)
 
     return (
       <div>
         <h1>Hello from home</h1>
-        <ShowUserComponent users={ user } />
+        <ShowUserComponent updateUserVisible={ this.props.updateUserVisible } />
       </div>
     )
   }
 }
 
-const mapStateToProps = (state) => {
-  return state;
-}
+const mapStateToProps = (state) => state;
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onTodoClick: (id) => {
-      dispatch(id)
+    updateUserVisible: (id) => {
+      dispatch(updateUserVisible(id))
     }
   }
 }
