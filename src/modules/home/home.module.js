@@ -6,8 +6,6 @@ import { ShowUserComponent } from '../../components/show-user/show-user.componen
 export class HomeModule extends Component {
 
   render() {
-    console.log(this.props)
-
     return (
       <div>
         <h1>Hello from home</h1>

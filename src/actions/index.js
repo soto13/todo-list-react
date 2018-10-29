@@ -1,48 +1,4 @@
-import HomeModule from '../modules/home/home.module';
-import UserModule from '../modules/user/user.module';
-
-let nextTodoId = 0
-let nextUserId = 0
-
-export const redirectHome = () => {
-  return {
-    type: 'REDIRECT_HOME',
-    component: HomeModule,
-    path: '/home' || '/',
-    children: [],
-  }
-}
-
-export const redirectUser = () => {
-  return {
-    type: 'REDIRECT_USER',
-    component: UserModule,
-    path: '/user',
-    children: [],
-  }
-}
-
-export const addTodo = (text) => {
-  return {
-    type: 'ADD_TODO',
-    id: nextTodoId++,
-    text
-  }
-}
-
-export const setVisibilityFilter = (filter) => {
-  return {
-    type: 'SET_VISIBILITY_FILTER',
-    filter
-  }
-}
-
-export const toggleTodo = (id) => {
-  return {
-    type: 'TOGGLE_TODO',
-    id
-  }
-}
+let nextUserId = 0;
 
 export const setUserDaata = function(user) {
   return {
@@ -51,7 +7,7 @@ export const setUserDaata = function(user) {
       id: nextUserId++,
       firstname: user.firstname,
       lastname: user.lastname,
-      isVIsible: user.isVIsible,
+      isVisible: user.isVisible,
       phone: user.phone,
     }
   }
@@ -80,7 +36,5 @@ export const updateUserVisible = function(id) {
 
 export const ADD_USER = 'ADD_USER';
 export const GET_USER = 'GET_USER';
-export const REDIRECT_HOME = 'REDIRECT_HOME';
-export const REDIRECT_USER = 'REDIRECT_USER';
 export const UPDATE_USER = 'UPDATE_USER';
 export const UPDATE_USER_VISIBLE = 'UPDATE_USER_VISIBLE';

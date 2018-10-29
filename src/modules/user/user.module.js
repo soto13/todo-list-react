@@ -34,7 +34,7 @@ class UserModule extends Component {
 
     if (firstname && lastname && phone) {
       try {
-        this.props.setUserDaata({ firstname,  lastname,  phone, isVisible: false });
+        this.props.setUserDaata({ firstname, lastname, phone, isVisible: false });
         inputfirstname.value = inputlastname.value = inputphone.value = '';
         return this.setState({ firstname: '',  lastname: '',  phone: '', isVisible: false, inputfirstname: '' });
       } catch (e) {

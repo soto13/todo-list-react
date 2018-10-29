@@ -10,14 +10,14 @@ export class ShowUserComponent extends Component {
   }
 
   componentDidMount() {
-    this.subscribe = this.context.store.subscribe(() => {
+    this.unsubscribe = this.context.store.subscribe(() => {
       this.forceUpdate();
-      console.log('hola')
+      console.log('hola', this.context.store.getState().user[0].isVisible)
     });
   }
 
   componentWillUnmount() {
-    this.subscribe.unsubscribe();
+    this.unsubscribe();
   }
 
   showUsers() {
