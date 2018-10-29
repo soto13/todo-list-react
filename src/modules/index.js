@@ -1,8 +1,9 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { TopNavComponent } from '../components';
 import AppRouter from '../routes/routing';
 import store from '../store';
-// import HomeModule from './home/home.module';
 
 class App extends Component {
   render() {
@@ -16,4 +17,8 @@ class App extends Component {
   }
 }
 
-export default App;
+App.contextTypes = {
+  store: PropTypes.object.isRequired,
+}
+
+export default connect()(App);

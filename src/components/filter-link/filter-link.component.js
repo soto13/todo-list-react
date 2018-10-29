@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 
 export class FilterLinkComponent extends Component {
   render() {
     const  { name, path } = this.props;
     return (
-      <Link to={ path } >{ name }</Link>
+      <NavLink to={ path }>{ name }</NavLink>
     )
   }
 }
